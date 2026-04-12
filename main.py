@@ -1,8 +1,11 @@
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import pandas as pd
 from collections import Counter
 from itertools import combinations
 
-INPUT_XLSX = 'assets/numbers.xlsx'
+INPUT_XLSX  = 'assets/numbers.xlsx'
 SHEET_NAME = 0
 RANGE_MIN, RANGE_MAX = 1, 42
 K_TOP = 20
@@ -236,3 +239,30 @@ with pd.ExcelWriter(OUTPUT_XLSX, engine="openpyxl") as writer:
 
 print(f"Ready. Saved results to: {OUTPUT_XLSX}")
 print(f"Valid rows: {len(valid_sorted)} | Invalid rows: {len(df) - len(valid_sorted)}")
+
+# === Frequency chart ===
+CHART_PATH = "assets/frecuencia_numeros.png"
+
+all_nums = list(range(RANGE_MIN, RANGE_MAX))
+frequencies = [freq_num.get(n, 0) for n in all_nums]
+mean_freq = sum(frequencies) / len(frequencies)
+
+fig, ax = plt.subplots(figsize=(14, 5))
+bars = ax.bar(all_nums, frequencies, color="steelblue", edgecolor="white", linewidth=0.4)
+
+# Highlight numbers above the mean
+for bar, freq in zip(bars, frequencies):
+    if freq > mean_freq:
+        bar.set_color("tomato")
+
+ax.axhline(mean_freq, color="gray", linestyle="--", linewidth=1, label=f"Mean ({mean_freq:.1f})")
+ax.set_xlabel("Number")
+ax.set_ylabel("Frequency")
+ax.set_title("Number Frequency")
+ax.set_xticks(all_nums)
+ax.tick_params(axis="x", labelsize=7)
+ax.legend()
+fig.tight_layout()
+fig.savefig(CHART_PATH, dpi=150)
+plt.close(fig)
+print(f"Chart saved to: {CHART_PATH}")

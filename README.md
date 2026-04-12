@@ -23,7 +23,13 @@ pip install pandas openpyxl
 python main.py
 ```
 
-Results are written to `assets/results.xlsx`.
+Results are written to `assets/results.xlsx` and a frequency chart is saved to `assets/frecuencia_numeros.png`.
+
+## Frequency chart
+
+![Number frequency](assets/frecuencia_numeros.png)
+
+> Bars in red exceed the mean frequency (dashed line). Generated automatically on each run.
 
 ## Configuration
 
