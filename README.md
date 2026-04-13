@@ -29,7 +29,7 @@ Results are written to `assets/results.xlsx` and a frequency chart is saved to `
 
 ![Number frequency](assets/frecuencia_numeros.png)
 
-> Bars in red exceed the mean frequency (dashed line). Generated automatically on each run.
+> Bars in red exceed the mean frequency (dashed line). Generated automatically on each run. More than 1000 samples.
 
 ## Configuration
 
